@@ -24,13 +24,13 @@ while reading_file == 1:
     if not target_line:
         pass
     else:
-        (start, length, direction) = target_line[0].split()[2:5]
+        (alignment_start, alignment_length, direction, size) = target_line[0].split()[2:6]
         if direction == '-':
-            end = int(start)
-            start = end - int(length)
+            end = int(size) - int(alignment_start)
+            start = end - int(alignment_length) + 1
         else:
-            start = int(start)
-            end = start + int(length)
+            start = int(alignment_start) + 1
+            end = start + int(alignment_length) + 1
         if (range_start <= start <= range_end) or (start <= range_start <= end):
             print(*block)
 print("finished scanning file")
